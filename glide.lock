@@ -1,0 +1,24 @@
+hash: 2dedd1c08c8adc7d0f034ddf5b5712868f624bffa55d00bfe289b3e509238d0a
+updated: 2019-08-02T04:24:35.882372-04:00
+imports:
+- name: github.com/google/logger
+  version: 03bdf7bcb2c4d98c8fdbf62f1473fb1303ca1c1d
+- name: github.com/kthomas/go-logger
+  version: 01c36065851341304751234b081327cf58728dba
+- name: golang.org/x/crypto
+  version: 4def268fd1a49955bfb3dda92fe3db4f924f2285
+  subpackages:
+  - cast5
+  - openpgp
+  - openpgp/armor
+  - openpgp/elgamal
+  - openpgp/errors
+  - openpgp/packet
+  - openpgp/s2k
+- name: golang.org/x/sys
+  version: 04f50cda93cbb67f2afa353c52f342100e80e625
+  subpackages:
+  - windows
+  - windows/registry
+  - windows/svc/eventlog
+testImports: []
