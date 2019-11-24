@@ -21,16 +21,16 @@ var (
 )
 
 func init() {
-	lvl := os.Getenv("LOG_LEVEL")
+	lvl := os.Getenv("PGP_LOG_LEVEL")
 	if lvl == "" {
 		lvl = "INFO"
 	}
 	log = logger.NewLogger("go-pgputil", lvl, true)
-
-	requireGPG()
 }
 
-func requireGPG() {
+// RequirePGP reads `PGP_PUBLIC_KEY`, `PGP_PRIVATE_KEY` and optional
+// `PGP_PASSPHRASE` from the environment and panics if the config is invalid.
+func RequirePGP() {
 	publicKey := strings.Replace(os.Getenv("PGP_PUBLIC_KEY"), `\n`, "\n", -1)
 	if publicKey == "" {
 		log.Panicf("Failed to resolve PGP_PUBLIC_KEY")
