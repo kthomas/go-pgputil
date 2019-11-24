@@ -1,7 +1,0 @@
-package: github.com/kthomas/go-pgputil
-import:
-- package: github.com/kthomas/go-logger
-- package: golang.org/x/crypto
-  subpackages:
-  - openpgp
-  - openpgp/packet
