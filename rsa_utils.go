@@ -18,8 +18,8 @@ var (
 	ErrNotRSAPublicKey = errors.New("Key is not a valid RSA public key")
 )
 
-// ParseRSAPrivateKeyFromPEM parses a PEM-encoded PKCS1 or PKCS8 private key
-func ParseRSAPrivateKeyFromPEM(key []byte) (*rsa.PrivateKey, error) {
+// DecodeRSAPrivateKeyFromPEM parses a PEM-encoded PKCS1 or PKCS8 private key
+func DecodeRSAPrivateKeyFromPEM(key []byte) (*rsa.PrivateKey, error) {
 	var err error
 
 	// Parse PEM block
@@ -44,8 +44,8 @@ func ParseRSAPrivateKeyFromPEM(key []byte) (*rsa.PrivateKey, error) {
 	return pkey, nil
 }
 
-// ParseRSAPrivateKeyFromPEMWithPassword parses a PEM-encoded PKCS1 or PKCS8 private key protected with password
-func ParseRSAPrivateKeyFromPEMWithPassword(key []byte, password string) (*rsa.PrivateKey, error) {
+// DecodeRSAPrivateKeyFromPEMWithPassword parses a PEM-encoded PKCS1 or PKCS8 private key protected with password
+func DecodeRSAPrivateKeyFromPEMWithPassword(key []byte, password string) (*rsa.PrivateKey, error) {
 	var err error
 
 	// Parse PEM block
@@ -76,8 +76,8 @@ func ParseRSAPrivateKeyFromPEMWithPassword(key []byte, password string) (*rsa.Pr
 	return pkey, nil
 }
 
-// ParseRSAPublicKeyFromPEM parses a PEM-encoded PKCS1 or PKCS8 public key
-func ParseRSAPublicKeyFromPEM(key []byte) (*rsa.PublicKey, error) {
+// DecodeRSAPublicKeyFromPEM parses a PEM-encoded PKCS1 or PKCS8 public key
+func DecodeRSAPublicKeyFromPEM(key []byte) (*rsa.PublicKey, error) {
 	var err error
 
 	// Parse PEM block
@@ -103,4 +103,13 @@ func ParseRSAPublicKeyFromPEM(key []byte) (*rsa.PublicKey, error) {
 	}
 
 	return pkey, nil
+}
+
+// EncodePrivateKeyToPEM encodes the given private key from RSA to PEM format
+func EncodePrivateKeyToPEM(privateKey *rsa.PrivateKey) []byte {
+	return pem.EncodeToMemory(&pem.Block{
+		Type:    "RSA PRIVATE KEY",
+		Headers: nil,
+		Bytes:   x509.MarshalPKCS1PrivateKey(privateKey),
+	})
 }
