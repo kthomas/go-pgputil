@@ -25,7 +25,14 @@ func init() {
 	if lvl == "" {
 		lvl = "INFO"
 	}
-	log = logger.NewLogger("go-pgputil", lvl, true)
+
+	var endpoint *string
+	if os.Getenv("SYSLOG_ENDPOINT") != "" {
+		endpt := os.Getenv("SYSLOG_ENDPOINT")
+		endpoint = &endpt
+	}
+
+	log = logger.NewLogger("go-pgputil", lvl, endpoint)
 }
 
 // RequirePGP reads `PGP_PUBLIC_KEY`, `PGP_PRIVATE_KEY` and optional
